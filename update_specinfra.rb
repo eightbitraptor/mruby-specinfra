@@ -7,8 +7,8 @@ require 'tmpdir'
 # Usage:
 #   1. Update SPECINFRA_VERSION
 #   2. Run ./update_specinfra.rb
-SPECINFRA_REPO    = 'mizzy/specinfra'
-SPECINFRA_VERSION = 'v2.87.0'
+SPECINFRA_REPO    = 'eightbitraptor/specinfra'
+SPECINFRA_VERSION = 'void'
 
 module GitHubFetcher
   def self.fetch(repo, tag:, path:)
@@ -16,7 +16,7 @@ module GitHubFetcher
       Dir.chdir(dir) do
         url = "https://github.com/#{repo}/archive/#{tag}.tar.gz"
         system("curl -L --fail --retry 3 --retry-delay 1 #{url} -o - | tar zxf -")
-        FileUtils.mv("#{File.basename(repo)}-#{tag.sub(/\Av/, '')}", path)
+        FileUtils.mv("#{File.basename(repo)}-#{tag}", path)
       end
     end
   end
